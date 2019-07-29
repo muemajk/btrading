@@ -10,29 +10,36 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os
 
+import os
+import smtplib
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 print(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
-#CSRF_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
-#SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 
 
-#SECURE_SSL_REDIRECT = True
+# SECURE_SSL_REDIRECT = True
 
-#SECURE_CONTENT_TYPE_NOSNIFF  = True
+# SECURE_CONTENT_TYPE_NOSNIFF  = True
 
-#SECURE_BROWSER_XSS_FILTER = True
+# SECURE_BROWSER_XSS_FILTER = True
 
-#SECURE_HSTS_SECONDS = 3600
-#SECURE_HSTS_PRELOAD = True
-#SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_SECONDS = 3600
+# SECURE_HSTS_PRELOAD = True
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # Application definition
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'stmp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'btproducts4u@gmail.com'
+EMAIL_HOST_PASSWORD = 'Roseda@2018bt'
 
 INSTALLED_APPS = [
     'adminstrator',
@@ -50,7 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-#X_FRAME_OPTIONS = 'DENY'
+# X_FRAME_OPTIONS = 'DENY'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -58,11 +65,9 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
- #   'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+    #   'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
-
-
 
 ROOT_URLCONF = 'btresources.urls'
 
@@ -84,26 +89,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'btresources.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-#DB_PASSES = os.environ['DB_PASSES']
-DB_PASSES ='12'
+# DB_PASSES = os.environ['DB_PASSES']
+DB_PASSES = 'Htfavkpa3m.'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'localhost',
         'NAME': 'btresources',
-        'USER' : 'root',
+        'USER': 'root',
         'PASSWORD': DB_PASSES,
-        'PORT':'3306',
+        'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -123,7 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -137,18 +139,17 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR,'btresources/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'btresources/static')
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'btresources/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'btresources/media')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    #'ecommerce/static',
+    # 'ecommerce/static',
 ]

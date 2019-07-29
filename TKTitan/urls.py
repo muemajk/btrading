@@ -1,12 +1,12 @@
 from django.urls import path
-
+from django.conf.urls import url
 
 from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('store/', views.store_page, name = 'store_page'),
-    path('Ordering/', views.tkordercatch, name = 'tkordercatch'),
+
     path('product/<int:pk>/', views.product_page, name = 'product_page'),
     path('TKCart/<int:pk>/<int:size>/', views.addtoTKCart, name='addtoTKCart'),
     path('TKCart/', views.TKCart_view, name='TKCart_view'),

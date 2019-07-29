@@ -5,8 +5,11 @@ from django.template import loader
 from Users.models import Client
 from django.utils import timezone
 from orders.models import FlintwoodOrders, BiotechOrders, TktitanOrders
-
-
+from .tokens import account_activation_token
+from django.core.mail import EmailMessage
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import  urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_text
 
 from decimal import Decimal
 import string
@@ -37,16 +40,23 @@ def login_page(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request,user)
-            #user_logged_in.send(user.__class__, instance=user, request = request)
-            context['form'] = LoginForm()
             if request.user.is_authenticated:
+
+                context['form'] = LoginForm()
                 currentUser = request.user
                 userid = currentUser.id
                 request.session['userID'] = userid
                 request.session['Usern']= currentUser.username
+                loggedclient = Client.objects.get(user=userid)
 
-                print(request.session['userID'])
-                return redirect('/')
+                if loggedclient.Verified == True:
+                    print(request.session['userID'])
+                    return redirect('/')
+                else:
+                    return redirect('/')
+                    #return redirect('/Users/login/')
+
+            #user_logged_in.send(user.__class__, instance=user, request = request)
 
         else:
 
@@ -61,9 +71,10 @@ def register_page(request):
     logout(request)
     form = RegisterForm(request.POST or None)
     template = loader.get_template('members/register.html')
+    email_temp = loader.get_template('members/active_email.html')
     context = {
         'form' : form,
-        
+
     }
     if form.is_valid():
 
@@ -84,35 +95,33 @@ def register_page(request):
         new_user = Users.objects.create_user(user_name, emailad, passwords)
         new_user.last_name = lastname
         new_user.first_name = firstname
-
+        new_user.is_active= False
         new_user.save()
+        current_site = get_current_site(request)
+        mail_subject = "Activate your btresources account."
+        message = loader.render_to_string("members/active_email.html",{
+            'user': new_user,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(new_user.pk)).decode(),
+            'token': account_activation_token.make_token(new_user),
+            })
+        to_email = emailad
+        email = EmailMessage(mail_subject,message, to = [to_email])
+        email.send()
+        new_client = Client(user=new_user,physical_address=physical_address,role= role,privilege=priv,Country=country,phonenumber=phone, Alternate_phonenumber =altphone, WeChat=wechat , Skype= skype, Verified=False )
+        new_client.save()
 
-        #print(role)
-        user = authenticate(request, username=user_name, password=passwords)
-        if user is not None:
-            request.session['userID'] = ''
-            #print(role)
-            login(request,user)
-            #user_logged_in.send(user.__class__, instance=user, request = request)
-            if request.user.is_authenticated:
-                currentUser = request.user
-                #print(currentUser.id)
-                print(role)
-                request.session['userID'] = currentUser.id
-                request.session['Usern']= currentUser.username
-                print(request.session['Usern'])
-                new_client = Client(user=currentUser,physical_address=physical_address,role= role,privilege=priv,Country=country,phonenumber=phone, Alternate_phonenumber =altphone, WeChat=wechat , Skype= skype )
-                new_client.save()
-
-                return redirect('/')
-
-                login(request,user)
-                print(user)
+        verifytemplate = loader.get_template('members/verifiedemail.html')
+        return HttpResponse(verifytemplate.render(context,request))
 
 
 
 
+    else:
+        return HttpResponse(template.render(context,request))
 
+
+        
 
 
     return HttpResponse(template.render(context,request))
@@ -235,7 +244,22 @@ def update_email_to_user(request,pk):
     return redirect('/Users/profile/')
 
 
-
+def activate(request, uidb64, token):
+    try:
+        uid= force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+        verifiedclient= Client.objects.get(user=user)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = none
+    if user is not None and account_activation_token.check_token(user,token):
+        user.is_active = True
+        verifiedclient.Verified= True
+        user.save()
+        verifiedclient.save(update_fields=['Verified'])
+        login(request,user)
+        return redirect('/Users/login/')
+    else:
+        return HttpResponse('Activation link fail.')
 
 
 

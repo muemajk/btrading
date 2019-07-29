@@ -156,73 +156,12 @@
         </div>
       <hr>
     </div></div>
-  <!-- Footer -->
-<footer class="page-footer font-small blue pt-4" style="background-color: black; color: white; box-shadow: 0px 0px 3px grey;   ">
 
-  <!-- Footer Links -->
-  <div class="container-fluid text-center text-md-left">
-
-    <!-- Grid row -->
-    <div class="row">
-
-      <!-- Grid column -->
-      <div class="col-md-6 mt-md-0 mt-3">
-
-        <!-- Content -->
-        <h5 class="text-uppercase">BTresources</h5>
-        <p>Trusted Ecommerce website.</p>
-
-      </div>
-      <!-- Grid column -->
-
-      <hr class="clearfix w-100 d-md-none pb-3">
-
-      <!-- Grid column -->
-      <div class="col-md-3 mb-md-0 mb-3">
-
-        <!-- Links -->
-        <h5 class="text-uppercase">Links</h5>
-
-        <ul class="list-unstyled">
-          <li>
-             <a href="{% url 'ecommerce:index'%}">Home</a>
-          </li>
-
-          <li>
-             <a href="{% url 'Flintwood:store_page'%}">Flintwood</a>
-          </li>
-          <li>
-             <a href="{% url 'TKTitan:store_page'%}">TkTitan</a>
-          </li>
-          <li>
-             <a href="{% url 'Biotech:store_page'%}">Biotech</a>
-          </li>
-         <li>
-             <a href="{% url 'admin_page'%}">Adminstrator</a>
-          </li>
-        </ul>
-
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-
-    </div>
-    <!-- Grid row -->
-
-  </div>
-  <!-- Footer Links -->
-
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2018 Copyright:
-    <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
-  </div>
-  <!-- Copyright -->
-
-</footer>
-
+        <!-- Footer -->
+        {% block footer %}
+        {% include 'components/footer.html' %}
+        {% endblock %}
+    <!-- Footer -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

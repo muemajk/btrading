@@ -51,11 +51,12 @@ def index(request):
         'user_name' : usez,
         'user':'gg',
         'times':timezone.now(),
-        'bioproduct':bioproducts.objects.all(),
-        'btproduct':btproducts.objects.all(),
-        'flints':flintproducts.objects.all(),
+        'bioproduct':bioproducts.objects.filter(Active=True),
+        'btproduct':btproducts.objects.filter(Active=True),
+        'flints':flintproducts.objects.filter(Active=True),
 
            }
+
     if request.user.is_authenticated:
         username = request.user.username
         context['user_name']= username

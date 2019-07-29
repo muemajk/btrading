@@ -51,12 +51,13 @@ def supplier_view(request):
 		stock = pform.cleaned_data.get('Stock')
 		description = pform.cleaned_data.get('Description')
 		origin = pform.cleaned_data.get('Country_of_origin')
+		place = pform.cleaned_data.get('city')
 		pic = pform.cleaned_data.get('Attach_picture')
 		password_characters =string.digits
 		ids=int( ''.join(random.choice(password_characters) for i in range(6)))
 
 		new_product = Product(pid=ids,name=item,Brand_Name=brand,
-			description=description,origin=origin,price=price,image= pic,stock=stock,Unit=unit,flintsupplierid=currentUser, Packaging=pack,Active=False)
+			description=description,Place=place,origin=origin,price=price,image= pic,stock=stock,Unit=unit,flintsupplierid=currentUser, Packaging=pack,Active=False)
 		new_product.save()
 		return HttpResponseRedirect('/FlintwoodSupplier/')
 

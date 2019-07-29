@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    {%load static %}
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,229 +11,45 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+
+  <script  src="{% static 'js/cart.js' %}" type="text/javascript"></script>
+
     <title>Product info!</title>
   </head>
   <body>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style=" position: fixed; top: 0;  left: 0;  z-index: 9999;  width: 100%; height: 50px; background-color: #FFFFF0;  height: auto;  ">
-              <a class="navbar-brand" href="{% url 'ecommerce:index'%}"><strong>BT</strong>RESOURCES</a>
 
-            <ul class="nav navbar-nav ">
-              <li class="active" ><a href="{% url 'ecommerce:index'%}">HOME</a></li>
-              <li ><a href="{% url 'ecommerce:company_view'%}">COMPANIES</a></li>
-              <li ><a href="{% url 'ecommerce:membership_view'%}">MEMBERSHIP</a></li>
-              <li><a href="{% url 'ecommerce:about_view'%}">ABOUT US</a></li>
-            </ul>
-
-            <ul class="navbar-nav  ml-auto">
-              {%if user_name == None%}
-               <li><span class="glyphicon glyphicon-log-in"></span><a href="{% url 'login_page'%}">LOGIN</a></li>
-              <li><span class="glyphicon glyphicon-user"></span><a href="{% url 'register_page'%}">SIGN UP</a></li>
-              {%elif user_name != None %}
-              {%for logged_user in user%}
-              {%if logged_user.role == "Admin" %}
-              <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="{% url 'adminstrator:order_view'%}"><span class="glyphicon glyphicon-shopping-cart"></span>ORDERS</a></li>
-
-    <li class="nav-item dropdown" style="color:white;"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user_name}}<br>{{times}}</a>
-    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-
-
-
-
-
-      <a class="dropdown-item" href="{% url 'adminstrator:buyers_view'%}">USERS</a>
-      <a class="dropdown-item" href="{% url 'adminstrator:freight'%}">FREIGHT VIEW</a>
-      <a class="dropdown-item" href="{% url 'adminstrator:freight_view'%}">FREIGHT CREATE</a>
-      <a class="dropdown-item" href="{% url 'adminstrator:finalied_order_view'%}">FULFILLED ORDERS</a>
-      <a class="dropdown-item" href="{% url 'adminstrator:product_view'%}">VERIFIED PRODUCTS</a>
-      <a class="dropdown-item" href="{% url 'adminstrator:verify_product'%}">UNVERIFIED PRODUCTS</a>
-      {%elif logged_user.role == "buyer"%}
-          {%if logged_user.privilege == "flintwood"%}
-                  <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="{% url 'Flintwood:FlintCart_view'%}" ><span class="glyphicon glyphicon-shopping-cart"></span>CART</a></li>
-          {%elif logged_user.privilege == "biotech"%}
-                  <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="{% url 'Biotech:cart_view'%}" ><span class="glyphicon glyphicon-shopping-cart"></span>CART</a></li>
-          {%elif logged_user.privilege == "bttitan"%}
-                  <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="{% url 'TkTitan:TKCart_view'%}"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a></li>
-          {%elif logged_user.privilege == "all"%}
-                    <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                          <a class="dropdown-item" href="{% url 'Flintwood:FlintCart_view'%}">Flintwood</a>
-                          <a class="dropdown-item" href="{% url 'Biotech:cart_view'%}">Biotec</a>
-                          <a class="dropdown-item" href="{% url 'TkTitan:TKCart_view'%}">Bttitan</a>
-                        </div
-                    </li>
-          {%endif%}
-          <li class="nav-item dropdown" style="color:white;"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user_name}}<br>{{times}}</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-      {%elif logged_user.role == "Flintwood_supplier"%}
-              {%if logged_user.privilege == "flintwood"%}
-                      <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="{% url 'Flintwood:FlintCart_view'%}"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a></li>
-              {%elif logged_user.privilege == "biotech"%}
-                      <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="{% url 'Biotech:cart_view'%}"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a></li>
-              {%elif logged_user.privilege == "bttitan"%}
-                      <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="{% url 'TkTitan:TKCart_view'%}"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a></li>
-              {%elif logged_user.privilege == "all"%}
-                        <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                              <a class="dropdown-item" href="{% url 'Flintwood:FlintCart_view'%}">Flintwood</a>
-                              <a class="dropdown-item" href="{% url 'Biotech:cart_view'%}">Biotec</a>
-                              <a class="dropdown-item" href="{% url 'TkTitan:TKCart_view'%}">Bttitan</a>
-                            </div
-                        </li>
-              {%endif%}
-            <li class="nav-item dropdown" style="color:white;"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user_name}}<br>{{times}}</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="{% url 'FlintSupplier:supplier_view'%}">SUPPLY</a>
-    {%elif logged_user.role == "btsupplier"%}
-            {%if logged_user.privilege == "flintwood"%}
-                    <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="{% url 'Flintwood:FlintCart_view'%}"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a></li>
-            {%elif logged_user.privilege == "biotech"%}
-                    <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="{% url 'Biotech:cart_view'%}"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a></li>
-            {%elif logged_user.privilege == "bttitan"%}
-                    <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="{% url 'TkTitan:TKCart_view'%}"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a></li>
-            {%elif logged_user.privilege == "all"%}
-                      <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{% url 'Flintwood:FlintCart_view'%}">Flintwood</a>
-                            <a class="dropdown-item" href="{% url 'Biotech:cart_view'%}">Biotec</a>
-                            <a class="dropdown-item" href="{% url 'TkTitan:TKCart_view'%}">Bttitan</a>
-                          </div
-                      </li>
-            {%endif%}
-            <li class="nav-item dropdown" style="color:white;"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user_name}}<br>{{times}}</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="{% url 'BTTitanSupplier:supplier_view'%}">SUPPLY</a>
-    {%elif logged_user.role == "biotec_supplier"%}
-            {%if logged_user.privilege == "flintwood"%}
-                    <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="{% url 'Flintwood:FlintCart_view'%}"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a></li>
-            {%elif logged_user.privilege == "biotech"%}
-                    <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="{% url 'Biotech:cart_view'%}"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a></li>
-            {%elif logged_user.privilege == "bttitan"%}
-                    <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="{% url 'TkTitan:TKCart_view'%}"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a></li>
-            {%elif logged_user.privilege == "all"%}
-                      <li class="nav-item dropdown" style="margin-top:8%;" ><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{% url 'Flintwood:FlintCart_view'%}">Flintwood</a>
-                            <a class="dropdown-item" href="{% url 'Biotech:cart_view'%}">Biotec</a>
-                            <a class="dropdown-item" href="{% url 'TkTitan:TKCart_view'%}">Bttitan</a>
-                          </div
-                      </li>
-            {%endif%}
-              <li class="nav-item dropdown" style="color:white;"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user_name}}<br>{{times}}</a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="{% url 'BiotecSupplier:supplier_view'%}">SUPPLY</a>
-      {%endif%}
-
-      {%endfor%}
-      <a class="dropdown-item" href="{% url 'profile_view'%}"><span class="glyphicon glyphicon-user"></span> PROFILE</a>
-      <a class="dropdown-item" href="{% url 'logout_view'%}"><span class="glyphicon glyphicon-log-out"></span> lOGOUT</a>
-    </div></li>
-    {%endif%}
-    </ul>
-        </nav>
+      {% block content %}
+      {% include '../components/navbar.html' %}
+      {% endblock %}
     <div class = "container" style=" margin-top: 100px;">
 
       <div class="row">
         <div class="col">
-
-          <div class="row">
-            <h3 style="font-weight: bold;">{{ info.name}}</h3>
-            <div class="col" style="margin-top: 30px;">
-              <div class="row" style=" font-style: italic; display: inline-block;width: 10%;  margin-left: 1%; float: right; margin-top: 40px;">
-                <p style="box-shadow: 0px 0px 5px grey; background-color: black; color: white;">{{prod_count}} units</p>
-                <form method="POST">{% csrf_token %}
-                {{form}}<button type="submit" class="btn btn-default" style="font-size: 10px;">CHANGE</button>
-              </form></div>
-              <img src="..\..\..{{info.image.url}}" width="50%" height="30%" style=" margin-top: 30px;">
-              <p style=" font-size: 15px; font-style: italic;" >{{info.Product_Catergory}}</p>
-              <h6 style="font-weight: bold;">Description:</h6>
-              <p>{{info.description}} </p>
-              <p style="font-weight: bold;  font-style: italic; display: inline-block;  float: right;" >Price : {{info.price}} KSH</p>
-              <p style="font-weight: bold;  font-style: italic; display: inline-block; float: left;" >{{info.stock}} In stock</p><hr>
-
-
-              <div style="text-align: center; padding-left: 30%; padding-right:30%; " >
-                <hr>
-              <a class="btn btn-default" href="{%url 'Biotech:store_page'%}" style="font-weight: bold; margin: 5%; font-style: italic; display: inline-block; float: left; border: solid; width: 130px; border-width: thin;">BACK</a>
-              <a class="btn btn-primary" href= "{% url 'Biotech:addtoCart' pk=info.pid  size=prod_count %}" style="font-weight: bold; margin: 5%; font-style: italic; display: inline-block; float: left;">ADD TO CART</a>
-              </div>
-            </div>
+          <div style="height:45px;">
+          {% block notify %}
+          {% include 'products/responses/notification.html' %}
+          {% endblock %}
           </div>
-
-
+          {% block infoblock %}
+          {% include '../components/productinfo.html' %}
+          {% endblock %}
         </div>
       </div>
     </div>
 
+
+        <!-- Footer -->
+
+              {% block footer %}
+              {% include '../components/footer.html' %}
+              {% endblock %}
     <!-- Footer -->
-<footer class="page-footer font-small blue pt-4" style="background-color: black; color: white; box-shadow: 0px 0px 3px grey;   ">
-
-  <!-- Footer Links -->
-  <div class="container-fluid text-center text-md-left">
-
-    <!-- Grid row -->
-    <div class="row">
-
-      <!-- Grid column -->
-      <div class="col-md-6 mt-md-0 mt-3">
-
-        <!-- Content -->
-        <h5 class="text-uppercase">Footer Content</h5>
-        <p>Here you can use rows and columns to organize your footer content.</p>
-
-      </div>
-      <!-- Grid column -->
-
-      <hr class="clearfix w-100 d-md-none pb-3">
-
-      <!-- Grid column -->
-      <div class="col-md-3 mb-md-0 mb-3">
-
-        <!-- Links -->
-        <h5 class="text-uppercase">Links</h5>
-
-        <ul class="list-unstyled">
-          <li>
-            <a href="{% url 'admin_page'%}">Adminstrator</a>
-          </li>
-        </ul>
-
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-3 mb-md-0 mb-3">
-
-        <!-- Links -->
-        <h5 class="text-uppercase">Links</h5>
-
-        <ul class="list-unstyled">
-          <li>
-            <a href="{% url 'admin_page'%}">Adminstrator</a>
-          </li>
-        </ul>
-
-      </div>
-      <!-- Grid column -->
-
-    </div>
-    <!-- Grid row -->
-
-  </div>
-  <!-- Footer Links -->
-
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2018 Copyright:
-    <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
-  </div>
-  <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>

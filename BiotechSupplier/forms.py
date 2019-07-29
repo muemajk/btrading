@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from Biotech.models import Product
 from django_countries.fields import CountryField
- 
+
 
 
 
@@ -67,7 +67,7 @@ class ProductForm(forms.Form):
 				}
 			 )
 		)
-
+	city = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','id':'form_place','placeholder':'What city or town is the product from'}))
 
 	Country_of_origin = CountryField(blank_label='(select country)').formfield()
 
@@ -75,7 +75,7 @@ class ProductForm(forms.Form):
 
 	Attach_picture = forms.FileField()
 
-	
+
 
 
 

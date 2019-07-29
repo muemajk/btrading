@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from Flintwood.models import Product
 from django_countries.fields import CountryField
- 
+
 
 
 
@@ -65,17 +65,14 @@ class ProductForm(forms.Form):
 			'id': 'form_description',
 			 'placeholder':'Give us a brief product description'
 				}
-			 )
+			)
 		)
-
-
 	Country_of_origin = CountryField(blank_label='(select country)').formfield()
-
-
+	city = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','id':'form_place','placeholder':'What city or town is the product from'}))
 
 	Attach_picture = forms.FileField()
 
-	
+
 
 
 

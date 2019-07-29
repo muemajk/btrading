@@ -19,6 +19,7 @@ class Product(models.Model):
     Brand_Name = models.CharField(max_length=254, default='Mineral')
     Product_Catergory = models.CharField(max_length=254, default='Mineral')
     description = models.TextField(max_length=2000)
+    Place =  models.TextField(max_length=200, default='none')
     origin = models.CharField(max_length=254, default='')
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='product_images')

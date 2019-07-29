@@ -95,7 +95,7 @@ class RegisterForm(forms.ModelForm):
 			 }
 			 )
 		)
-	We_Chat = forms.CharField(
+	We_Chat = forms.CharField(required=False,
 		widget=forms.TextInput(
 			attrs={'class' : 'form-control',
 			'id': 'form_alternate_phone',
@@ -104,7 +104,7 @@ class RegisterForm(forms.ModelForm):
 			 )
 		)	
 
-	Skype = forms.CharField(
+	Skype = forms.CharField(required=False,
 		widget=forms.TextInput(
 			attrs={'class' : 'form-control',
 			'id': 'form_alternate_phone',

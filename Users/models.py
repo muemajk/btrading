@@ -56,6 +56,8 @@ class Client(models.Model):
     WeChat=models.CharField(max_length=15,  default='none')
     Skype=models.CharField(max_length=15,  default='none')
     
+    Verified= models.BooleanField(default=False)
+    
 
     def __int__(self):
         return self.id
