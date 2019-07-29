@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Cart info!</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse" style=" box-shadow: 0px 0px 5px grey; position: fixed; top: 0;  left: 0;  z-index: 9999;  width: 100%; height: 50px;  background-color: white;  ">
+  <div class="container-fluid" style="">
+    <div class="navbar-header" style="">
+      <a class="navbar-brand" href="#">BTRESOURCES</a>
+    </div>
+    <ul class="nav navbar-nav" style="display: inline-block; width: 50%; padding-left: 20%; float: right;">
+      <li class="active" style="display: inline-block;  margin-left: 2%;"><a href="#" style="text-decoration-color: grey; color: black; font-weight: bold;">HOME</a></li>
+      <li class="dropdown" style="display: inline-block; margin-left: 2%; font-weight: bold;">
+        <a href="{% url 'company_view'%}"style="text-decoration-color: black; color: black; font-weight: bold;">COMPANIES</a>
+      </li>
+      {%if user_name != ""%}
+      <li style="display: inline-block; margin-left: 2%;"><a href="{% url 'cart_view'%}" style="text-decoration-color: black; font-weight: bold; color: black;">CART</a></li>
+      {%endif%} 
+      <li style="display: inline-block; margin-left: 2%;"><a href="{% url 'store_page'%}" style="text-decoration-color: black; font-weight: bold; color: black;">STORE</a></li>
+      <li style="display: inline-block; margin-left: 2%;"><a href="#" style="text-decoration-color: black; font-weight: bold; color: black;">MEMBERSHIP</a></li>
+    </ul>
+    <ul style="display: inline-block; width: 30%; padding-left: 20%;">
+      <li style="display: inline-block; margin-left: 3%;"><a href="#"style="text-decoration-color: black; font-weight: bold; color: black;">LOGIN</a></li>
+      <listyle="display: inline-block; margin-left: 3%;">|</li>
+      <li style="display: inline-block; margin-left: 1%;"><a href="#" style="text-decoration-color: black; font-weight: bold; color: black;">SIGN UP</a></li>
+    </ul>
+  </div>
+</nav>
+    <div style="text-align: center;">
+    <h1>This is the cart page!</h1>
+    </div>
+    <div class = "container">
+      <div class="row">
+        <a class="btn btn-primary" href="{% url 'logout_view'%}">lOGOUT</a>
+      </div>
+      <div class="row">
+        <div class="col">
+       <div class="shopping-cart" style="font-size: 12px;" >
+          <!-- Title -->
+          <div class="title" style="font-size: 17px; font-weight: bolder;"  >
+           {{user}}'s Shopping Cart
+          </div>
+         <table style="display: inline-block; background-color: orange; width: 100%;  "><tr>
+          <td><div class="image" style="display: inline-block; background-color: green;  text-align: left; width: 180px; ">
+              
+              <span><p style="font-weight: bolder;">PRODUCT</p></span>
+            </div></td>
+          <td style="width: 100%;">
+            <div class="description" style="display: inline-block; background-color: yellow; width: 330px;">
+              <span><p style="font-weight: bolder;">PRODUCT DESCRIPTION</p></span>
+              
+            </div></td>
+            <td style="width: 100%;"><div class="description" style="display: inline-block; background-color: red; width: 175px;">
+              <span><p style="font-weight: bolder;">PRODUCT ADDED ON</p></span>
+              
+            </div>
+            </td>
+
+            <td style="width: 100%;"><div class="description" style="display: inline-block; background-color: red; width: 130px;">
+             <span style="width: auto;"><p style="font-weight: bolder;">ORDER SIZE</p></span>
+              
+            </div>
+            </td>
+            <td style="width: 100%;"><div class="description" style="display: inline-block; background-color: red; width: 150px;">
+              <span><p style="font-weight: bolder;">PRODUCT PRICE</p></span>
+              
+            </div>
+            </td>
+
+            <td style="width: 100%;"><div class="description" style="display: inline-block; background-color: red; width: 150px;">
+             <span style="width: auto;"><p style="font-weight: bolder;">ACTION</p></span>
+              
+            </div>
+            </td><button class="btn btn-default" style=" float: right; text-decoration: none;" ><a href = "{% url 'store_page'%}" style="font-size: 12px;">ADD</a></button>
+          </tr>
+        </table><hr><hr>
+          <!-- Product #1 -->
+
+          {%if cart_content == ""%}
+          <div class="row" style="font-style: italic; display: inline-block;  background-color: green; width: 16%; text-align: left; ">
+              <p style="font-weight: bolder; ">Your Cart is empty, Shop and add to cart!!</p>
+            </div>
+          {%elif cart_content != "" %}
+              {% for product in cart_content %}
+              
+                <div class="image" style="font-style: italic; display: inline-block;  background-color: green; width: 16%; text-align: left; ">
+                  <img src="{{product.image.url}}" alt="" />
+                  <span><p style="font-weight: bolder;">{{product.Product_name}}</p></span>
+                </div>
+              
+                <div class="description" style="font-style: italic; display: inline-block; background-color: yellow; width: 30%;">
+                  <span><p style="font-size: 12px;">{{product.Product_description}}</p></span>
+                  
+                </div>
+
+                <div class="description" style="font-style: italic; display: inline-block; background-color: red; width: 16%;">
+                  <span>{{product.date_created}}</span>
+                  
+                </div>
+             
+             
+                <div class="product-price" style=" font-style: italic; display: inline-block;width: 10%; margin-left: 1%;"><p style=" font-weight: bold">({{product.count}} units)</p>
+                <form method="POST">{% csrf_token %}
+                {{form}}<button type="submit" class="btn btn-default" style="font-size: 10px; padding: 0px;">Up date </button>
+              </form></div>
+                <div class="product-price" style=" font-style: italic; display: inline-block;width: 13%; margin-left: 1%;">USD: {{product.price}} per item</div>
+
+                <div class="description" style="display: inline-block; width: 10%;">
+                  
+                   <a href="{% url 'delete_from_cart' pk=product.id%}">Remove</a>
+                  
+                </div>
+                <hr>
+              
+                {% endfor %}
+            {%endif%} 
+            <div class="row" style=" display: inline-block; margin:5%; float: right;  width: auto;">
+               <div class="total-price" style=" display: inline-block; margin:5%; float: right;">
+                <a href="{% url 'clear_whole_cart' pk=memid%}" style="text-decoration: none; float: right;">CLEAR CART</a>
+                <table>
+                  <tr>
+                    <td><h6 style="font-style: italic;">PURCHASE TOTAL: </h6></td>
+                    <td style="text-align: center;">{{total_price}} USD</td>
+                  </tr>
+                  <tr>
+                    <td><h6 style="font-style: italic;">VAT: </h6></td>
+                    <td style="text-align: center;">{{Vat}} USD</td>
+                  </tr>
+
+                  <tr>
+                    <td><h6 style="font-style: italic;">FINAL TOTAL: </h6></td>
+                    <td style="text-align: center; font-weight: bold;">{{final_price}} USD</td>
+                  </tr>
+                  <tr>
+                    <td><button class="btn btn-default" style=" display: inline-block; margin:5%; float: right; box-shadow: 3px 3px 3px grey;"><a href="{% url 'calculate_cart' %}" style="text-decoration: none;">RECALCULATE</a></button></td>
+                    <td><button class="btn btn-primary" style=" display: inline-block; margin:5%; float: right; box-shadow: 3px 3px 3px grey;"><a href="{% url 'checkout' pk=memid%}" style=" text-decoration-color: black; color: black; text-decoration: none;">ORDER</a></button></td>
+                  </tr>
+                </table>
+               </div><br>
+                  
+               </div>
+          </div>
+            
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+<footer class="page-footer font-small blue pt-4" style="background-color: black; color: white; box-shadow: 0px 0px 3px grey;   ">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5 class="text-uppercase">Footer Content</h5>
+        <p>Here you can use rows and columns to organize your footer content.</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase">Links</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="{% url 'admin_page'%}">Adminstrator</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase">Links</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="{% url 'admin_page'%}">Adminstrator</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2018 Copyright:
+    <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

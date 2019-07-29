@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Store!</title>
+  </head>
+  <body>
+ <nav class="navbar navbar-inverse" style=" box-shadow: 0px 0px 5px grey; position: fixed; top: 0;  left: 0;  z-index: 9999;  width: 100%; height: 50px; background-color: white;  height: 90px;  ">
+  <div class="container-fluid" style="">
+    <div class="navbar-header" style="">
+      <a class="navbar-brand" href="#"><strong>BT</strong>RESOURCES</a>
+    </div>
+    <ul class="nav navbar-nav" style="display: inline-block; width: 57%; padding-left: 15%; float: right; ">
+      <li class="active" style="display: inline-block;  margin-left: 2%;"><a href="{% url 'index'%}" style="text-decoration-color: grey; color: black; font-weight: bold;">HOME</a></li>
+      <li class="dropdown" style="display: inline-block; margin-left: 2%; font-weight: bold;">
+        <a href="{% url 'company_view'%}"style="text-decoration-color: black; color: black; font-weight: bold;">COMPANIES</a>
+        
+      </li>
+      <li style="display: inline-block; margin-left: 2%;"><a href="{% url 'store_page'%}" style="text-decoration-color: black; font-weight: bold; color: black;">STORE</a></li>
+      {%if user_name != ""%}
+      <li style="display: inline-block; margin-left: 2%;"><a href="{% url 'cart_view'%}" style="text-decoration-color: black; font-weight: bold; color: black;">CART</a></li>
+      {%endif%}  
+      <li style="display: inline-block; margin-left: 2%;"><a href="{% url 'membership_view'%}" style="text-decoration-color: black; font-weight: bold; color: black;">MEMBERSHIP</a></li>
+    </ul>
+    <ul style="display: inline-block; width: auto; ">
+      {%if user_name == None%}
+       <li style="display: inline-block; margin-left: 3%;"><a href="{% url 'login_page'%}"style="text-decoration-color: black; font-weight: bold; color: black;">LOGIN</a></li>
+      
+      <li style=" display: inline-block; margin-left: 3%;">|</li>
+      <li style="display: inline-block; margin-left: 1%;"><a href="{% url 'register_page'%}" style="text-decoration-color: black; font-weight: bold; color: black;">SIGN UP</a></li>
+      {%elif user_name != None %}
+          
+            <li style=" display: inline-block; margin-top: 2px; margin-left: 2%;"><p style="font-weight: bold; font-size: 10px; font-style: italic;">{{user_name}}<br>{{times}}</p></li>
+            <li style=" display: inline-block; float: right;"><div class="row" style="float: left; width: 100%;"><a class="btn btn-primary" href="{% url 'logout_view'%}" style="font-size: 10px; height: 25px;">lOGOUT</a></div></li>
+      {%endif%}      
+    </ul>
+  </div>
+</nav>
+
+    <div style="text-align: center;">
+    <h1>This is the Store!</h1>
+    </div>
+    <div class = "container">
+      <h6>{{user_name}}</h6>
+      <p style="font-weight: bold; font-style: italic;">{{time_now}}</p>
+      
+      
+      <div class="row">
+        <div class="col">
+          <p>In this 2019 GDC talk, Insomniac Games' Elan Ruskin discusses the challenges of rapidly growing asset count, and adapting rendering, streaming, and lighting to build a New York City that fits on a Blu-Ray for Marvel's Spider-Ma</p>
+          <nav>
+            <ul>
+              <li>Register for GDC: https://ubm.io/2yWXW38</li>
+              <li>
+                Join the GDC mailing list: http://www.gdconf.com/subscribe
+              </li>
+              <li>Follow GDC on Twitter: https://twitter.com/Official_GDC </li>
+            </ul>
+          </nav>
+          <p>GDC talks cover a range of developmental topics including game design, programming, audio, visual arts, business management, production, online games, and much more. We post a fresh GDC video every day.  Subscribe to the channel to stay on top of regular updates, and check out GDC Vault  for thousands of more in-depth talks from our archives.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+<footer class="page-footer font-small blue pt-4" style="background-color: black; color: white; box-shadow: 0px 0px 3px grey;   ">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5 class="text-uppercase">Footer Content</h5>
+        <p>Here you can use rows and columns to organize your footer content.</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase">Links</h5>
+
+        <ul class="list-unstyled">
+          <li>
+             <a href="{% url 'admin_page'%}">Adminstrator</a>
+          </li>
+          
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase">Links</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="{% url 'admin_page'%}">Adminstrator</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2018 Copyright:
+    <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
